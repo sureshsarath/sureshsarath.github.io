@@ -63,8 +63,8 @@ function initParticles() {
     });
     
     // Configuration
-    const particleCount = 300; // High density
-    const visibilityRadius = 300; 
+    const particleCount = 100; // High density
+    const visibilityRadius = 500; 
     
     function resize() {
         width = canvas.width = canvas.offsetWidth;
@@ -73,12 +73,12 @@ function initParticles() {
     
     class Particle {
         constructor() {
-            this.size = Math.random() * 4 + 1; 
+            this.size = Math.random() * 1.3 + 1; 
             this.baseX = Math.random() * width;
             this.baseY = Math.random() * height;
             this.x = this.baseX;
             this.y = this.baseY;
-            this.density = (Math.random() * 30) + 1; 
+            this.density = (Math.random() * 100) + 1; 
             // Drift properties
             this.angle = Math.random() * 360;
             this.angleSpeed = Math.random() * 0.02 + 0.005;
@@ -143,7 +143,7 @@ function initParticles() {
                 
                 // If within a slightly larger radius than repulsion
                 if (dist < 100) { 
-                    color = 'rgba(255, 255, 255, 1)'; 
+                    color = 'rgba(167, 255, 67, 1)'; 
                     shadow = 'rgba(255, 255, 255, 1)';
                 }
             }
