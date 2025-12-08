@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarath Suresh - GeoData Scientist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Sarath Suresh</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#projects">Projects</a></li>
+
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <header id="home" class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="greeting">Hello There</p>
+                <h1 class="name">I'm Sarath Suresh</h1>
+                <p class="role-text">A <span id="typing-text"></span><span class="cursor">|</span></p>
+                <p id="hero-about-text" class="hero-description">
+                    <!-- About text injected here -->
+                </p>
+                <div class="hero-actions">
+                    <a href="#projects" class="btn primary">View My Work <i class="fas fa-arrow-right"></i></a>
+                    <a href="#resume" class="btn secondary">Download Resume <i class="fas fa-download"></i></a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-img-container">
+                    <img src="assets/proPic.jpg" alt="Sarath Suresh" id="profile-img">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section Removed -->
+
+    <section id="resume" class="section dark-bg">
+        <div class="container">
+            <!-- Headers are now inside the columns or just removed if redundant? Image shows headers "Education" and "Professional Experience" at top of cols. -->
+            <div class="resume-container">
+                <div class="resume-column">
+                    <h3 class="column-title">Education</h3>
+                    <div id="education-list" class="resume-list"></div>
+                    
+                    <div class="skills-subsection">
+                        <h4 class="resume-title" style="margin-top: 2rem;">Software Proficiency</h4>
+                        <div id="software-skills" class="software-grid"></div>
+                        
+                        <h4 class="resume-title" style="margin-top: 1.5rem;">Relevant Coursework</h4>
+                        <div id="relevant-courses" class="course-tags"></div>
+                    </div>
+                </div>
+                <div class="resume-column">
+                    <h3 class="column-title">Professional Experience</h3>
+                    <div id="experience-list" class="resume-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="section dark-bg">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="publications-list" id="publications-list">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="social-links">
+                <a href="#" id="footer-maillink"><i class="fas fa-envelope"></i></a>
+                <a href="#" id="footer-linkedin"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p>Sarath Suresh. University of Washington</p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
