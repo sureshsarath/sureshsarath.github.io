@@ -7,7 +7,13 @@ const resumeData = {
         dob: "20.04.1996",
         phone: "+1 206-396-9020",
         roles: ["GeoData Scientist", "Hydrologist", "Civil Engineer", "ML/AI in Earth Science"],
-        about: "I am a PhD student at University of Washington majoring in Hydrology, Remote Sensing, and Data Science. I mostly work with reservoirs, agricultural canals, and on the intersection of hydropower, flood risk and agriculture output.",
+        about: `<i>'Access to water data is as much a basic right as access to water itself!'</i> <br><br>Just as clean, safe water is a fundamental human right,
+                so too should open access to the data that governs it be.  As a research scholar at SASWE Labs, University of Washington, 
+                I leverage the power of satellite remote sensing and hydrological models to realize this vision. 
+                I collaborate with regional stakeholders to provide tools and solutions that address 
+                water-related challenges. Currently, my research focuses on assessing the impact of hydropower 
+                dams on downstream flooding and agricultural productivity across the world.
+                <br><br> Together, let us champion the cause for open and accessible water data!`,
         image: "assets/proPic.jpg"
     },
     education: [
@@ -130,12 +136,19 @@ const resumeData = {
             image: "assets/grain_pic.png",
             link: "https://grain-canals.readthedocs.io/en/latest/"
         },
+         {
+            title: "RAT-Kerala",
+            subtitle: "A Python Package for India WRIS data",
+            period: "Sep.2024 – Nov.2024",
+            description: "The Reservoir Assessment Tool – Kerala is a fully satellite-based tool that enables the transparent and near real time tracking of multiple reservoirs in the state of Kerala. The tool utilizes satellite derived storage estimates and hydrologically modelled inflow data to estimate critical reservoir operations data such as dam releases.",
+            image: "assets/rat-kerala.jpg"
+        },
         {
             title: "PyWRIS",
             subtitle: "A Python Package for India WRIS data",
             period: "Sep.2024 – Nov.2024",
             description: "Developed a Python package to access and analyze data from the India Water Resources Information System (IndiaWRIS). Implemented unique features including automated web scraping, rich hypertext support for Jupyter notebooks and built-in Plotly-based visualization capabilities.",
-            image: "assets/project1.png"
+            image: "assets/pywris_functionalities.gif"
         },
         {
             title: "From Plate to Planet",

@@ -34,6 +34,7 @@
     --font-mono: 'Roboto Mono', monospace;
 }
 
+
 * {
     margin: 0;
     padding: 0;
@@ -56,6 +57,18 @@ a {
 
 ul {
     list-style: none;
+}
+
+/* Scroll Fade-in Animation */
+.section {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 1s ease-out, transform 0.8s ease-out;
+}
+
+.section.fade-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Navbar */
@@ -196,10 +209,11 @@ ul {
 }
 
 .hero-description {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #aaaaaa;
     margin-bottom: 2.5rem;
-    line-height: 1.6;
+    line-height: 1.4;
+    text-align: justify;
 }
 
 .hero-actions {
@@ -285,14 +299,19 @@ ul {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    /* non bold font */
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 1rem;
     margin-bottom: 1rem;
     text-align: center;
     position: relative;
     display: inline-block;
-    left: 50%;
+    left: 5%;
     transform: translateX(-50%);
 }
+
+
 
 .section-title::after {
     content: '';
@@ -300,12 +319,74 @@ ul {
     width: 60px;
     height: 4px;
     background: #0060c0;
-    margin: 1px auto 0;
+    margin: 5px 0 0;
     border-radius: 2px;
 }
 
 .dark-bg {
     background-color: #f8f9fa;
+}
+
+/* About Section */
+.about-section {
+    padding: 1rem 10%;
+    background-color: #ffffff;
+    
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto ;
+    margin-bottom: 1rem;
+    
+}
+
+.about-text {
+    flex: 1;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.about-text .section-title {
+    margin-top: -1rem;;
+    text-align: left;
+    display: block;
+    transform: none;
+    left: auto;
+    margin-bottom: 1 rem;
+}
+
+/* Override for About section only */
+.about-text .section-title::after {
+    margin: 1px 0 0 0;
+    /* Left-aligned for About Me */
+}
+
+.about-text p {
+    font-size: 1rem;
+    color: var(--accent-color);
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.about-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -3rem;
+}
+
+.about-image img {
+    width: 110%;
+    max-width: 900px;
+    height: auto;
+    border-radius: 10px;
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
 }
 
 /* Skills (New Location) */
@@ -535,8 +616,13 @@ ul {
 }
 
 /* Publications */
+#publications {
+    background-color: #ffffff;
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
+}
+
 .publication-item {
-    background: var(--white);
+    background: white;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     border-radius: 8px;
@@ -828,6 +914,11 @@ footer {
     .hero-actions {
         justify-content: center;
     }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -890,7 +981,9 @@ footer {
 #key-projects {
     padding: 0.1rem 10% 4rem;
     /* Reduced top padding from 4rem to 2rem */
-    background-color: #f0f0f0;
+    background-color: #ffffff;
+    margin-bottom: -1rem;
+    box-shadow: 0 -4px 15px rgba(12, 31, 68, 0.13);
     /* Light gray background to distinguish from hero */
 }
 
