@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarath Suresh - GeoData Scientist</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="logo">SS</div>
@@ -49,6 +53,20 @@
 
     <!-- About Section Removed -->
 
+    <section id="key-projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Highlights</h2>
+            <div class="carousel-container">
+                <div class="project-carousel" id="key-projects-carousel">
+                    <!-- Populated by JS -->
+                </div>
+                <button class="carousel-next" id="carousel-next-btn">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <section id="resume" class="section dark-bg">
         <div class="container">
             <!-- Headers are now inside the columns or just removed if redundant? Image shows headers "Education" and "Professional Experience" at top of cols. -->
@@ -56,11 +74,11 @@
                 <div class="resume-column">
                     <h3 class="column-title">Education</h3>
                     <div id="education-list" class="resume-list"></div>
-                    
+
                     <div class="skills-subsection">
                         <h4 class="resume-title" style="margin-top: 2rem;">Software Proficiency</h4>
                         <div id="software-skills" class="software-grid"></div>
-                        
+
                         <h4 class="resume-title" style="margin-top: 1.5rem;">Relevant Coursework</h4>
                         <div id="relevant-courses" class="course-tags"></div>
                     </div>
@@ -104,4 +122,5 @@
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

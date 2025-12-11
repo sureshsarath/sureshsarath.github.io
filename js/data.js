@@ -6,9 +6,9 @@ const resumeData = {
         linkedin: "sarathsuresh96",
         dob: "20.04.1996",
         phone: "+1 206-396-9020",
-        roles: ["GeoData Scientist", "Hydrologist", "Civil Engineer"],
+        roles: ["GeoData Scientist", "Hydrologist", "Civil Engineer", "ML/AI in Earth Science"],
         about: "I am a PhD student at University of Washington majoring in Hydrology, Remote Sensing, and Data Science. I mostly work with reservoirs, agricultural canals, and on the intersection of hydropower, flood risk and agriculture output.",
-        image: "assets/proPic.jpg" 
+        image: "assets/proPic.jpg"
     },
     education: [
         {
@@ -123,28 +123,40 @@ const resumeData = {
     ],
     projects: [
         {
+            title: "GRAIN",
+            subtitle: "Global Registry of Agricultural Irrigation Networks",
+            period: "Apr.2025 – Present",
+            description: "The Global Registry of Agricultural Irrigation Networks (GRAIN) is a first of its kind open-access geospatial database of the world's irrigation canals. GRAIN combines OpenStreetMap (OSM) data with a ML based workflow to identify over 3.8 million km of irrigation canals across 95 countries.",
+            image: "assets/grain_pic.png",
+            link: "https://grain-canals.readthedocs.io/en/latest/"
+        },
+        {
             title: "PyWRIS",
             subtitle: "A Python Package for India WRIS data",
             period: "Sep.2024 – Nov.2024",
-            description: "Developed a Python package to access and analyze data from the India Water Resources Information System (IndiaWRIS). Implemented unique features including automated web scraping, rich hypertext support for Jupyter notebooks and built-in Plotly-based visualization capabilities."
+            description: "Developed a Python package to access and analyze data from the India Water Resources Information System (IndiaWRIS). Implemented unique features including automated web scraping, rich hypertext support for Jupyter notebooks and built-in Plotly-based visualization capabilities.",
+            image: "assets/project1.png"
         },
         {
             title: "From Plate to Planet",
             subtitle: "Interactive Data Visualization",
             period: "Jan. 2024 – Mar. 2024",
-            description: "A blog style interactive visualization built using VegaLite, JavaScript and Observable. Analyzed global datasets on methane emissions, meat consumption, and animal welfare to explore the role of environmental and ethical concerns in motivating shifts toward veganism."
+            description: "A blog style interactive visualization built using VegaLite, JavaScript and Observable. Analyzed global datasets on methane emissions, meat consumption, and animal welfare to explore the role of environmental and ethical concerns in motivating shifts toward veganism.",
+            image: "assets/project2.png"
         },
         {
             title: "Optimal AE Sensor Placement for Crack Localization",
             subtitle: "ML model for sensor optimization",
             period: "Jun.2019 – Jan.2021",
-            description: "Developed a CatBoost based ML model to optimize the number and spatial arrangement of acoustic emission sensors for accurately localizing cracks in concrete slabs of varying geometry."
+            description: "Developed a CatBoost based ML model to optimize the number and spatial arrangement of acoustic emission sensors for accurately localizing cracks in concrete slabs of varying geometry.",
+            image: "assets/project3.png"
         },
         {
             title: "Image Steganography",
             subtitle: "Data encryption within images",
             period: "Jun. 2019 – Jan.2021",
-            description: "Implemented Image Steganography, the process of encrypting data within images, using the Least Significant Bit method in MATLAB, for images and text."
+            description: "Implemented Image Steganography, the process of encrypting data within images, using the Least Significant Bit method in MATLAB, for images and text.",
+            image: "assets/project4.png"
         }
     ],
     skills: {

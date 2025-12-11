@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
-        hamburger.innerHTML = navLinks.classList.contains('active') 
-            ? '<i class="fas fa-times"></i>' 
+        hamburger.innerHTML = navLinks.classList.contains('active')
+            ? '<i class="fas fa-times"></i>'
             : '<i class="fas fa-bars"></i>';
     });
 
@@ -15,10 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             navLinks.classList.remove('active'); // Close mobile menu if open
-            if(hamburger.innerHTML.includes('times')) {
-                 hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            if (hamburger.innerHTML.includes('times')) {
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
             }
-            
+
             document.querySelector(this.getAttribute('href')).scrollIntoView({
                 behavior: 'smooth'
             });
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initParticles(); // Start background animation
         renderSkills(resumeData.skills);
         renderTimeline(resumeData.education, resumeData.experience);
+        renderKeyProjects(resumeData.projects); // New Key Projects Carousel
         renderProjects(resumeData.projects);
         renderPublications(resumeData.publications);
         renderFooter(resumeData.profile);
@@ -38,6 +39,65 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Resume Data not found!');
     }
 });
+
+// ... (keep initParticles, renderHero, renderSkills, renderTimeline as is) ...
+
+// Key Projects Carousel
+function renderKeyProjects(projects) {
+    const carousel = document.getElementById('key-projects-carousel');
+    if (!carousel) return;
+
+    // Clone projects to avoid modifying original array if needed, or just use as is.
+    // We need a mutable array for rotation.
+    let currentProjects = [...projects];
+
+    const updateCarousel = () => {
+        carousel.innerHTML = '';
+        // Show first 3 projects
+        const visibleProjects = currentProjects.slice(0, 3);
+
+        visibleProjects.forEach(project => {
+            const cardFlip = document.createElement('div');
+            cardFlip.className = 'project-card-flip';
+
+            cardFlip.innerHTML = `
+                <div class="project-card-inner">
+                    <div class="project-card-front">
+                        <img src="${project.image}" alt="${project.title}">
+                        <div class="card-content">
+                            <h3>${project.title}</h3>
+                        </div>
+                    </div>
+                    <div class="project-card-back">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        <a href="${project.link}" target="_blank" class="btn-view-more" onclick="event.stopPropagation()">View More</a>
+                    </div>
+                </div>
+            `;
+
+            cardFlip.addEventListener('click', () => {
+                cardFlip.classList.toggle('flipped');
+            });
+
+            carousel.appendChild(cardFlip);
+        });
+    };
+
+    updateCarousel();
+
+    const nextBtn = document.getElementById('carousel-next-btn');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            // Rotate array: move first element to end
+            const first = currentProjects.shift();
+            currentProjects.push(first);
+            updateCarousel();
+        });
+    }
+}
+
+// ... (keep renderProjects, renderPublications, renderFooter, toggleExperience as is) ...
 
 // Particle Background Animation (Spotlight Effect - No Idle/Mobile logic)
 function initParticles() {
@@ -47,7 +107,7 @@ function initParticles() {
     const ctx = canvas.getContext('2d');
     let width, height;
     let particles = [];
-    
+
     // Mouse tracking
     let mouse = { x: null, y: null, radius: 150 }; // Interaction radius
 
@@ -59,32 +119,32 @@ function initParticles() {
 
     window.addEventListener('mouseout', () => {
         mouse.x = null;
-        mouse.y = null; 
+        mouse.y = null;
     });
-    
+
     // Configuration
     const particleCount = 100; // High density
-    const visibilityRadius = 500; 
-    
+    const visibilityRadius = 500;
+
     function resize() {
         width = canvas.width = canvas.offsetWidth;
         height = canvas.height = canvas.offsetHeight;
     }
-    
+
     class Particle {
         constructor() {
-            this.size = Math.random() * 1.3 + 1; 
+            this.size = Math.random() * 1.8 + 1;
             this.baseX = Math.random() * width;
             this.baseY = Math.random() * height;
             this.x = this.baseX;
             this.y = this.baseY;
-            this.density = (Math.random() * 100) + 1; 
+            this.density = (Math.random() * 100) + 1;
             // Drift properties
             this.angle = Math.random() * 360;
             this.angleSpeed = Math.random() * 0.02 + 0.005;
             this.driftRadius = Math.random() * 20 + 10;
         }
-        
+
         update() {
             // 1. Low-frequency drift
             this.angle += this.angleSpeed;
@@ -95,14 +155,14 @@ function initParticles() {
             if (mouse.x != null) {
                 let dx = mouse.x - this.x;
                 let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx*dx + dy*dy)*1.8;
-                
+                let distance = Math.sqrt(dx * dx + dy * dy) * 1.8;
+
                 if (distance < mouse.radius) {
                     const maxDistance = mouse.radius;
                     const force = (maxDistance - distance) / maxDistance;
                     const directionX = (dx / distance) * force * this.density;
                     const directionY = (dy / distance) * force * this.density;
-                    
+
                     this.x -= directionX;
                     this.y -= directionY;
                 } else {
@@ -116,7 +176,7 @@ function initParticles() {
                     }
                 }
             } else {
-                 if (this.x !== driftX) {
+                if (this.x !== driftX) {
                     let dx = this.x - driftX;
                     this.x -= dx / 20;
                 }
@@ -126,36 +186,44 @@ function initParticles() {
                 }
             }
         }
-        
+
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.closePath();
-            
+
             // Proximity Check for Color
-            let color = 'rgba(195, 195, 196, 0.8)'; // Default Dark Grey
-            let shadow = 'rgba(136, 136, 136, 0.8)';
-            
+            let color = 'rgba(247, 247, 249, 1)'; // Default Dark Grey
+            let color_fill = 'rgba(228, 228, 231, 0.2)'; // Default Dark Grey
+            let shadow = 'rgba(254, 254, 254, 0.2)';
+            let linewidth = 0.5;
+
             if (mouse.x != null) {
                 const dx = mouse.x - this.x;
                 const dy = mouse.y - this.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
                 // If within a slightly larger radius than repulsion
-                if (dist < 100) { 
-                    color = 'rgba(167, 255, 67, 1)'; 
+                if (dist < 100) {
+                    color = 'rgba(0, 242, 255, 1)';
                     shadow = 'rgba(255, 255, 255, 1)';
+                    color_fill = 'rgba(171, 244, 248, 1)';
+                    linewidth = 1;
+
                 }
             }
 
             ctx.shadowBlur = 10;
             ctx.shadowColor = shadow;
-            ctx.fillStyle = color;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = linewidth;
+            ctx.fillStyle = color_fill;
             ctx.fill();
-            ctx.shadowBlur = 0; 
+            ctx.shadowBlur = 0;
+            ctx.stroke();
         }
     }
-    
+
     function init() {
         resize();
         particles = [];
@@ -163,52 +231,52 @@ function initParticles() {
             particles.push(new Particle());
         }
     }
-    
+
     function animate() {
         ctx.clearRect(0, 0, width, height);
-        
+
         particles.forEach(p => {
             p.update();
-            
+
             // Only draw if within visibility radius of mouse
             if (mouse.x != null) {
                 const dx = mouse.x - p.x;
                 const dy = mouse.y - p.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
                 if (dist < visibilityRadius) {
                     // Smooth fade out at edges
-                    const alpha = 1 - Math.pow(dist / visibilityRadius, 2); 
+                    const alpha = 1 - Math.pow(dist / visibilityRadius, 2);
                     ctx.globalAlpha = Math.max(0, alpha);
                     p.draw();
                     ctx.globalAlpha = 1.0;
                 }
             }
         });
-        
+
         requestAnimationFrame(animate);
     }
-    
+
     window.addEventListener('resize', () => {
         resize();
         particles = [];
         init();
     });
-    
+
     init();
     animate();
 }
 
 // Hero Section
 function renderHero(profile) {
-    document.getElementById('profile-img').src = profile.image; 
-    
+    document.getElementById('profile-img').src = profile.image;
+
     // Inject About text into Hero
     const aboutEl = document.getElementById('hero-about-text');
     if (aboutEl) {
         aboutEl.innerHTML = profile.about;
     }
-    
+
     const typingElement = document.getElementById('typing-text');
     const roles = profile.roles;
     let roleIndex = 0;
@@ -218,7 +286,7 @@ function renderHero(profile) {
 
     function type() {
         const currentRole = roles[roleIndex];
-        
+
         if (isDeleting) {
             typingElement.textContent = currentRole.substring(0, charIndex - 1);
             charIndex--;
@@ -253,7 +321,7 @@ function renderSkills(skills) {
         "MATLAB": "fas fa-code",
         "ArcGIS / QGIS": "fas fa-globe-americas",
         "Tableau": "fas fa-chart-bar",
-        "Observable": "fas fa-eye", 
+        "Observable": "fas fa-eye",
         "VegaLite": "fas fa-chart-line",
         "STAAD Pro": "fas fa-building",
         "AutoCAD": "fas fa-drafting-compass"
@@ -281,11 +349,11 @@ function renderSkills(skills) {
 function renderTimeline(education, experience) {
     const eduContainer = document.getElementById('education-list');
     const expContainer = document.getElementById('experience-list');
-    
+
     const createItem = (data, type) => {
         const item = document.createElement('div');
         item.className = 'resume-item';
-        
+
         const title = type === 'edu' ? data.degree : data.role;
         const subtitle = type === 'edu' ? data.institution : data.organization;
         const location = data.location;
@@ -307,7 +375,7 @@ function renderTimeline(education, experience) {
                     descHTML += `<li>${descArray[i]}</li>`;
                 }
                 descHTML += '</ul></div>';
-                
+
                 // Toggle Button
                 descHTML += '<button class="btn-expand" onclick="toggleExperience(this)">Show More <i class="fas fa-chevron-down"></i></button>';
             } else {
@@ -316,9 +384,9 @@ function renderTimeline(education, experience) {
                 descHTML += '</ul>';
             }
         } else if (typeof descArray === 'string') {
-             descHTML = `<p class="resume-desc">${descArray}</p>`;
+            descHTML = `<p class="resume-desc">${descArray}</p>`;
         }
-        
+
         item.innerHTML = `
             <div class="resume-marker"></div>
             <h4 class="resume-title">${title}</h4>
@@ -347,10 +415,10 @@ function renderProjects(projects) {
         const card = document.createElement('div');
         card.className = 'project-card';
         card.style.cursor = 'pointer';
-        
+
         // Image Section
-        const imgHtml = project.image 
-            ? `<div class="project-img-container"><img src="${project.image}" alt="${project.title}"></div>` 
+        const imgHtml = project.image
+            ? `<div class="project-img-container"><img src="${project.image}" alt="${project.title}"></div>`
             : '';
 
         card.innerHTML = `
@@ -364,9 +432,9 @@ function renderProjects(projects) {
                 <p class="project-desc">${project.description}</p>
             </div>
         `;
-        
+
         card.addEventListener('click', () => {
-             window.location.href = `project.html?id=${project.id}`;
+            window.location.href = `project.html?id=${project.id}`;
         });
 
         grid.appendChild(card);
@@ -376,7 +444,7 @@ function renderProjects(projects) {
 // Publications Section
 function renderPublications(pubs) {
     const list = document.getElementById('publications-list');
-    
+
     pubs.forEach(pub => {
         const item = document.createElement('div');
         item.className = 'publication-item';
@@ -394,11 +462,11 @@ function renderPublications(pubs) {
                  ${pub.doi ? `<a href="https://doi.org/${pub.doi.replace('doi: ', '')}" target="_blank" style="color:var(--teal)">View Paper <i class="fas fa-external-link-alt"></i></a>` : ''}
             </div>
         `;
-        
+
         item.addEventListener('click', () => {
             item.classList.toggle('active');
         });
-        
+
         list.appendChild(item);
     });
 }
@@ -412,7 +480,7 @@ function renderFooter(profile) {
 function toggleExperience(btn) {
     const hiddenContainer = btn.previousElementSibling;
     hiddenContainer.classList.toggle('expanded');
-    
+
     if (hiddenContainer.classList.contains('expanded')) {
         btn.innerHTML = 'Show Less <i class="fas fa-chevron-up"></i>';
     } else {
