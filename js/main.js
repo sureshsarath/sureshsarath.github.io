@@ -32,12 +32,31 @@ document.addEventListener('DOMContentLoaded', () => {
         renderSkills(resumeData.skills);
         renderTimeline(resumeData.education, resumeData.experience);
         renderKeyProjects(resumeData.projects); // New Key Projects Carousel
-        renderProjects(resumeData.projects);
         renderPublications(resumeData.publications);
         renderFooter(resumeData.profile);
     } else {
         console.error('Resume Data not found!');
     }
+
+    // Fade-in sections on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+            } else {
+                entry.target.classList.remove('fade-in');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+        observer.observe(section);
+    });
 });
 
 // ... (keep initParticles, renderHero, renderSkills, renderTimeline as is) ...
@@ -84,17 +103,22 @@ function renderKeyProjects(projects) {
         });
     };
 
+    const rotateCarousel = () => {
+        // Rotate array: move first element to end
+        const first = currentProjects.shift();
+        currentProjects.push(first);
+        updateCarousel();
+    };
+
     updateCarousel();
 
     const nextBtn = document.getElementById('carousel-next-btn');
     if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            // Rotate array: move first element to end
-            const first = currentProjects.shift();
-            currentProjects.push(first);
-            updateCarousel();
-        });
+        nextBtn.addEventListener('click', rotateCarousel);
     }
+
+    // Auto-scroll every 5 seconds (5000 milliseconds)
+    setInterval(rotateCarousel, 5000);
 }
 
 // ... (keep renderProjects, renderPublications, renderFooter, toggleExperience as is) ...
