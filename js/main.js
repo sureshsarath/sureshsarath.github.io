@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         initParticles('resume-canvas'); // Resume section particles
         renderKeyProjects(resumeData.projects); // New Key Projects Carousel
         renderPublications(resumeData.publications);
+        renderRelatedEntries(resumeData.conferences, 'conference-list', 'conferences', 'conference-proceedings');
+        renderRelatedEntries(resumeData.patents, 'patent-list', 'patents', 'patents');
         renderFooter(resumeData.profile);
     } else {
         console.error('Resume Data not found!');
@@ -58,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.section').forEach(section => {
         observer.observe(section);
     });
+
 });
 
 // ... (keep initParticles, renderHero, renderSkills, renderTimeline as is) ...
@@ -536,6 +539,11 @@ function renderProjects(projects) {
 // Publications Section with Pagination
 let publicationsPage = 0;
 const PUBS_PER_PAGE = 5;
+const RELATED_PER_PAGE = 3;
+const relatedPagination = {
+    conferences: 0,
+    patents: 0
+};
 
 function renderPublications(pubs) {
     const list = document.getElementById('publications-list');
@@ -589,7 +597,7 @@ function renderPublications(pubs) {
         if (publicationsPage > 0) {
             publicationsPage--;
             renderPublications(pubs);
-            document.getElementById('publications-list').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('publications').scrollIntoView({ behavior: 'smooth' });
         }
     });
     paginationContainer.appendChild(leftBtn);
@@ -602,11 +610,88 @@ function renderPublications(pubs) {
         if (endIdx < pubs.length) {
             publicationsPage++;
             renderPublications(pubs);
-            document.getElementById('publications-list').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('publications').scrollIntoView({ behavior: 'smooth' });
         }
     });
     paginationContainer.appendChild(rightBtn);
+
+    const pageInfo = document.createElement('div');
+    pageInfo.className = 'pub-page-info';
+    pageInfo.textContent = `${Math.min(startIdx + 1, pubs.length)}-${Math.min(endIdx, pubs.length)}/${pubs.length}`;
+    paginationContainer.appendChild(pageInfo);
     
+    list.appendChild(paginationContainer);
+}
+
+function renderRelatedEntries(items, listId, key, sectionId) {
+    const list = document.getElementById(listId);
+    if (!list) return;
+
+    if (!items || items.length === 0) {
+        list.innerHTML = '<p class="related-description">Entries coming soon.</p>';
+        return;
+    }
+
+    const currentPage = relatedPagination[key] || 0;
+    const startIdx = currentPage * RELATED_PER_PAGE;
+    const endIdx = startIdx + RELATED_PER_PAGE;
+    const entriesToShow = items.slice(startIdx, endIdx);
+
+    list.innerHTML = '';
+
+    entriesToShow.forEach(entry => {
+        const card = document.createElement('div');
+        card.className = 'publication-item related-card';
+        card.innerHTML = `
+            <div class="pub-header">
+                <div class="pub-title">${entry.title}</div>
+                <i class="fas fa-chevron-down pub-icon"></i>
+            </div>
+            <div class="pub-meta">
+                ${entry.authors ? entry.authors : ''}${entry.year ? ` (${entry.year})` : ''}${entry.venue ? ` - <span class="venue-blue">${entry.venue}</span>` : ''}
+            </div>
+            <p class="related-description">${entry.description || ''}</p>
+        `;
+        card.addEventListener('click', () => {
+            card.classList.toggle('active');
+        });
+        list.appendChild(card);
+    });
+
+    const paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pub-pagination';
+
+    const leftBtn = document.createElement('button');
+    leftBtn.className = 'pub-nav-btn';
+    leftBtn.innerHTML = '&lt;';
+    leftBtn.disabled = currentPage === 0;
+    leftBtn.addEventListener('click', () => {
+        if (relatedPagination[key] > 0) {
+            relatedPagination[key]--;
+            renderRelatedEntries(items, listId, key, sectionId);
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    paginationContainer.appendChild(leftBtn);
+
+    const rightBtn = document.createElement('button');
+    rightBtn.className = 'pub-nav-btn';
+    rightBtn.innerHTML = '&gt;';
+    rightBtn.disabled = endIdx >= items.length;
+    rightBtn.addEventListener('click', () => {
+        if (endIdx < items.length) {
+            relatedPagination[key]++;
+            renderRelatedEntries(items, listId, key, sectionId);
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    paginationContainer.appendChild(rightBtn);
+
+    const pageInfo = document.createElement('div');
+    pageInfo.className = 'pub-page-info';
+    pageInfo.textContent = `${Math.min(startIdx + 1, items.length)}-${Math.min(endIdx, items.length)}/${items.length}`;
+    paginationContainer.appendChild(pageInfo);
+
     list.appendChild(paginationContainer);
 }
 

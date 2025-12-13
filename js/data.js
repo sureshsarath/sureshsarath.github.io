@@ -14,7 +14,7 @@ const resumeData = {
                 water-related challenges. Currently, my research focuses on assessing the impact of hydropower 
                 dams on downstream flooding and agricultural productivity across the world.
                 <br><br> Together, let us champion the cause for open and accessible water data!`,
-        image: "assets/proPic.jpg"
+        image: "assets/images/proPic.jpg"
     },
     education: [
         {
@@ -178,13 +178,38 @@ const resumeData = {
             pdfUrl: "assets/publications_pdf/essd-grain-preprint-v1.pdf"
         }
     ],
+    conferences: [
+        {
+            title: "Satellite Earth Observations Based Tracking of Reservoir Operations for Flood Preparedness in Mountainous and High Precipitation Regions",
+            authors: "Suresh, S. et al.",
+            year: "2023",
+            venue: "AGU Fall Meeting 2023, San Francisco",
+            description: "Case study focused on the 2018 Kerala floods demonstrating how satellite data guides reservoir operations."
+        },
+        {
+            title: "Effect of Marine Growth on Wave Loading on Small Diameter Tubular Structural Members",
+            authors: "Suresh, S. et al.",
+            year: "2020",
+            venue: "International Conference on Hydraulics, Water Resources and Coastal Engineering (HYDRO 2020), NIT Rourkela",
+            description: "Investigates how marine growth alters hydrodynamic loading on offshore tubular structures."
+        }
+    ],
+    patents: [
+        {
+            title: "MarGro v.1.0",
+            authors: "Suresh, S. et al.",
+            year: "2021",
+            venue: "Indian Trademark No: 5027217",
+            description: "A tool to compute wave forces acting on offshore structural members under varying marine growth."
+        }
+    ],
     projects: [
         {
             title: "GRAIN",
             subtitle: "Global Registry of Agricultural Irrigation Networks",
             period: "Apr.2025 – Present",
             description: "The Global Registry of Agricultural Irrigation Networks (GRAIN) is a first of its kind open-access geospatial database of the world's irrigation canals. GRAIN combines OpenStreetMap (OSM) data with a ML based workflow to identify over 3.8 million km of irrigation canals across 95 countries.",
-            image: "assets/grain_pic.png",
+            image: "assets/images/grain_pic.png",
             link: "https://grain-canals.readthedocs.io/en/latest/"
         },
          {
@@ -192,35 +217,35 @@ const resumeData = {
             subtitle: "A Python Package for India WRIS data",
             period: "Sep.2024 – Nov.2024",
             description: "The Reservoir Assessment Tool – Kerala is a fully satellite-based tool that enables the transparent and near real time tracking of multiple reservoirs in the state of Kerala. The tool utilizes satellite derived storage estimates and hydrologically modelled inflow data to estimate critical reservoir operations data such as dam releases.",
-            image: "assets/rat-kerala.jpg"
+            image: "assets/images/rat-kerala.jpg"
         },
         {
             title: "PyWRIS",
             subtitle: "A Python Package for India WRIS data",
             period: "Sep.2024 – Nov.2024",
             description: "Developed a Python package to access and analyze data from the India Water Resources Information System (IndiaWRIS). Implemented unique features including automated web scraping, rich hypertext support for Jupyter notebooks and built-in Plotly-based visualization capabilities.",
-            image: "assets/pywris_functionalities.gif"
+            image: "assets/gifs/pywris_functionalities.gif"
         },
         {
             title: "From Plate to Planet",
             subtitle: "Interactive Data Visualization",
             period: "Jan. 2024 – Mar. 2024",
             description: "A blog style interactive visualization built using VegaLite, JavaScript and Observable. Analyzed global datasets on methane emissions, meat consumption, and animal welfare to explore the role of environmental and ethical concerns in motivating shifts toward veganism.",
-            image: "assets/project2.png"
+            image: "assets/images/project2.png"
         },
         {
             title: "Optimal AE Sensor Placement for Crack Localization",
             subtitle: "ML model for sensor optimization",
             period: "Jun.2019 – Jan.2021",
             description: "Developed a CatBoost based ML model to optimize the number and spatial arrangement of acoustic emission sensors for accurately localizing cracks in concrete slabs of varying geometry.",
-            image: "assets/project3.png"
+            image: "assets/images/project3.png"
         },
         {
             title: "Image Steganography",
             subtitle: "Data encryption within images",
             period: "Jun. 2019 – Jan.2021",
             description: "Implemented Image Steganography, the process of encrypting data within images, using the Least Significant Bit method in MATLAB, for images and text.",
-            image: "assets/project4.png"
+            image: "assets/images/project4.png"
         }
     ],
     skills: {
