@@ -64,6 +64,7 @@ ul {
     opacity: 0;
     transform: translateY(100px);
     transition: opacity 1s ease-out, transform 0.8s ease-out;
+    scroll-margin-top: 90px;
 }
 
 .section.fade-in {
@@ -81,7 +82,7 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
+    padding: 0.4rem 5%;
     z-index: 1000;
     box-shadow: 0 1px 100px rgba(77, 165, 228, 0.4);
 }
@@ -311,6 +312,14 @@ ul {
     transform: translateX(-50%);
 }
 
+.section-subtitle {
+    text-align: center;
+    color: var(--accent-color);
+    font-size: 1rem;
+    margin: -0.5rem auto 1.5rem;
+    max-width: 600px;
+}
+
 
 
 .section-title::after {
@@ -324,7 +333,7 @@ ul {
 }
 
 .dark-bg {
-    background-color: #f8f9fa;
+    background-color: #ffffff;
 }
 
 /* About Section */
@@ -368,9 +377,51 @@ ul {
 
 .about-text p {
     font-size: 1rem;
-    color: var(--accent-color);
+    color: rgb(85, 84, 84);
     line-height: 1.5;
     text-align: justify;
+}
+
+.key-areas {
+    margin-top: 2rem;
+    margin-bottom: -2rem;
+}
+
+.key-areas h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.key-area-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    
+}
+
+.key-area-tag {
+    background: rgba(207, 207, 207, 0.021);
+    border: 1px solid rgb(112, 112, 112);
+    color: #4e4e4e;
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.key-area-tag:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    color: #0b5cd4;
+}
+
+.about-wide-tags {
+    margin-top: 1.5rem;
 }
 
 .about-image {
@@ -420,6 +471,26 @@ ul {
     color: var(--primary-color);
 }
 
+#resume .skills-subsection h4 {
+    color: var(--white);
+}
+
+#resume .software-item {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--white);
+}
+
+#resume .software-item i {
+    color: var(--white);
+}
+
+#resume .course-tag {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
+}
+
 .software-item:hover {
     transform: translateY(-2px);
     background: #fff;
@@ -442,33 +513,99 @@ ul {
 
 
 /* Resume Section (Split Layout) */
+.resume-section {
+    position: relative;
+    background: linear-gradient(135deg, #011425 0%, #00050b 100%);
+    color: var(--white);
+    padding: 4rem 0;
+    overflow: hidden;
+}
+
+.resume-section canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.resume-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.resume-heading {
+    color: var(--white);
+    display: block;
+    text-align: center;
+    left: auto;
+    transform: none;
+    margin: 0 auto 3rem;
+}
+
+.resume-download {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.resume-btn {
+    margin-top: 2rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
+}
+
+.resume-btn:hover {
+    border-color: rgba(0, 167, 255, 0.8);
+    box-shadow: 0 10px 18px rgba(0, 167, 255, 0.2);
+}
+
+.resume-heading::after {
+    background: rgba(255, 255, 255, 0.6);
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .resume-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 2.5rem;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+.resume-column {
+    background: rgba(0, 6, 10, 0.329);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 1.8rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
 .column-title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
-    padding-bottom: 0.5rem;
+    font-size: 1.35rem;
+    margin-bottom: 1.2rem;
+    color: var(--white);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 0.4rem;
     display: inline-block;
 }
 
 .resume-list {
     position: relative;
     padding-left: 20px;
-    border-left: 1px solid #ddd;
+    border-left: 1px solid rgba(255, 255, 255, 0.25);
     /* Vertical Line */
 }
 
 .resume-item {
     position: relative;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     padding-left: 25px;
 }
 
@@ -479,9 +616,9 @@ ul {
     top: 5px;
     width: 12px;
     height: 12px;
-    background: var(--white);
+    background: rgba(1, 20, 37, 0.8);
     /* Hollow effect center */
-    border: 2px solid var(--teal);
+    border: 2px solid rgba(255, 255, 255, 0.8);
     /* Use 'teal' var which is black in B&W theme */
     border-radius: 50%;
     z-index: 1;
@@ -489,41 +626,41 @@ ul {
 
 /* Specific B&W overrides just to be safe if var changed */
 .resume-marker {
-    border-color: var(--primary-color);
-    background: var(--section-bg, #fff);
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(1, 20, 37, 0.8);
 }
 
 .resume-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
     margin-bottom: 0.5rem;
 }
 
 .resume-badge {
     display: inline-block;
-    background-color: #f0f0f0;
-    color: var(--primary-color);
-    padding: 0.2rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
     margin-bottom: 0.8rem;
     font-family: var(--font-mono);
 }
 
 .resume-subtitle {
-    font-size: 1.1rem;
+    font-size: 0.85rem;
     font-style: italic;
-    color: var(--accent-color);
-    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.8rem;
 }
 
 .resume-details,
 .resume-desc {
-    color: var(--accent-color);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.82rem;
+    line-height: 1.5;
 }
 
 .resume-details li {
@@ -535,8 +672,9 @@ ul {
 
 .resume-details li::before {
     content: '•';
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    left: 0;
 }
 
 /* Collapsible Experience */
@@ -555,10 +693,10 @@ ul {
 .btn-expand {
     background: none;
     border: none;
-    color: var(--accent-color);
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.82rem;
+    font-weight: 500;
     padding: 0.5rem 0;
     margin-left: 25px;
     /* Align with text */
@@ -569,7 +707,7 @@ ul {
 }
 
 .btn-expand:hover {
-    color: #007bff;
+    color: #7dc3ff;
 }
 
 .project-card {
@@ -617,19 +755,55 @@ ul {
 
 /* Publications */
 #publications {
+    padding: 0rem 10% 1rem;
+        /* top right/left bottom — reduce the top value */
     background-color: #ffffff;
-    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+    scroll-margin-top: 140px;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+#publications::before {
+    content: '';
+    position: absolute;
+    bottom: -40px;
+    left: -60px;
+    width: 320px;
+    height: 320px;
+    background: url('../assets/satellite_gif_4.gif') no-repeat center/cover;
+    opacity: 0.9;
+    z-index: 0;
+}
+
+#publications::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -50px;
+    width: 260px;
+    height: 260px;
+    background: url('../assets/typing_gif.gif') no-repeat center/cover;
+    opacity: 0.9;
+    z-index: 0;
+}
+
+#publications .container {
+    position: relative;
+    z-index: 1;
 }
 
 .publication-item {
     background: white;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    padding: 1rem 1rem;
+    margin-bottom: 0.2rem;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     cursor: pointer;
     transition: background 0.2s;
 }
+
 
 .publication-item:hover {
     background: #f1f3f5;
@@ -642,11 +816,12 @@ ul {
 }
 
 .pub-title {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 400;
     color: var(--secondary-color);
     flex: 1;
 }
+
 
 .pub-icon {
     font-size: 1.2rem;
@@ -656,9 +831,14 @@ ul {
 }
 
 .pub-meta {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #777;
     margin-top: 0.5rem;
+}
+
+.pub-meta strong {
+    color: #000000;
+    font-weight: 700;
 }
 
 .pub-abstract {
@@ -667,8 +847,14 @@ ul {
     transition: max-height 0.4s ease-out;
     margin-top: 0;
     color: #555;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     border-top: 1px solid #eee;
+    text-align: justify;
+}
+
+.pub-abstract strong {
+    color: #000000;
+    font-weight: 700;
 }
 
 .publication-item.active .pub-abstract {
@@ -680,6 +866,87 @@ ul {
 
 .publication-item.active .pub-icon {
     transform: rotate(180deg);
+}
+
+/* Publication Buttons */
+.pub-buttons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 1rem;
+}
+
+.pub-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.pdf-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.pdf-btn:hover {
+    background-color: #da190b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+}
+
+.doi-btn {
+    background-color: #2196F3;
+    color: white;
+}
+
+.doi-btn:hover {
+    background-color: #1976D2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
+}
+
+.publication-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.1rem;
+    justify-content: flex-start;
+}
+
+.publication-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.publication-btn i {
+    font-size: 1.1rem;
+}
+
+.publication-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.15);
+    opacity: 0.95;
+}
+
+.scholar-btn {
+    background-color: #4285f4;
+}
+
+.orcid-btn {
+    background-color: #a6ce39;
+    color: #0c3c1c;
 }
 
 /* Footer */
@@ -789,8 +1056,13 @@ footer {
     transition: max-height 0.4s ease-out;
     margin-top: 0;
     color: #555;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     border-top: 1px solid #eee;
+}
+
+.pub-abstract strong {
+    color: #000000;
+    font-weight: 700;
 }
 
 .publication-item.active .pub-abstract {
@@ -1003,6 +1275,11 @@ footer {
     gap: 2rem;
     width: 100%;
     perspective: 1000px;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.project-carousel.swiping {
+    opacity: 0;
 }
 
 .project-card-flip {
@@ -1091,15 +1368,15 @@ footer {
     background: transparent;
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .carousel-next:hover {
@@ -1134,4 +1411,47 @@ footer {
 .btn-view-more:hover {
     background-color: #eee;
     color: black;
+}
+
+.pub-pagination {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 0.8rem 0;
+    margin-top: 0.4rem;
+}
+
+.pub-nav-btn {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.pub-nav-btn:hover:not(:disabled) {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.pub-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: #ccc;
+    color: #ccc;
+}
+.venue-blue {
+    color: #0486fffb;
+    /* A clean blue, adjust as needed */
+    font-style: italic;
+    /* keeps it consistent inside <em> */
 }

@@ -28,9 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load Data
     if (typeof resumeData !== 'undefined') {
         renderHero(resumeData.profile);
-        initParticles(); // Start background animation
         renderSkills(resumeData.skills);
         renderTimeline(resumeData.education, resumeData.experience);
+        initParticles('hero-canvas'); // Start hero background animation
+        initParticles('resume-canvas'); // Resume section particles
         renderKeyProjects(resumeData.projects); // New Key Projects Carousel
         renderPublications(resumeData.publications);
         renderFooter(resumeData.profile);
@@ -69,6 +70,8 @@ function renderKeyProjects(projects) {
     // Clone projects to avoid modifying original array if needed, or just use as is.
     // We need a mutable array for rotation.
     let currentProjects = [...projects];
+    let carouselInterval = null;
+    let flippedCards = []; // Track all flipped cards
 
     const updateCarousel = () => {
         carousel.innerHTML = '';
@@ -95,8 +98,27 @@ function renderKeyProjects(projects) {
                 </div>
             `;
 
-            cardFlip.addEventListener('click', () => {
+            cardFlip.addEventListener('click', (e) => {
+                e.stopPropagation();
                 cardFlip.classList.toggle('flipped');
+                
+                if (cardFlip.classList.contains('flipped')) {
+                    // Card is now flipped - add to flipped cards list and pause carousel
+                    if (!flippedCards.includes(cardFlip)) {
+                        flippedCards.push(cardFlip);
+                    }
+                    if (carouselInterval) {
+                        clearInterval(carouselInterval);
+                        carouselInterval = null;
+                    }
+                } else {
+                    // Card is flipped back - remove from list
+                    flippedCards = flippedCards.filter(card => card !== cardFlip);
+                    // Resume carousel if no cards are flipped
+                    if (flippedCards.length === 0) {
+                        startCarousel();
+                    }
+                }
             });
 
             carousel.appendChild(cardFlip);
@@ -104,10 +126,47 @@ function renderKeyProjects(projects) {
     };
 
     const rotateCarousel = () => {
-        // Rotate array: move first element to end
-        const first = currentProjects.shift();
-        currentProjects.push(first);
-        updateCarousel();
+        if (flippedCards.length > 0) return; // Don't rotate if any cards are flipped
+        
+        // Add swipe-out animation
+        carousel.classList.add('swiping');
+        
+        setTimeout(() => {
+            // Rotate array: move first element to end
+            const first = currentProjects.shift();
+            currentProjects.push(first);
+            updateCarousel();
+            
+            // Remove swipe-out class to fade back in
+            carousel.classList.remove('swiping');
+        }, 300);
+    };
+
+    const startCarousel = () => {
+        if (carouselInterval) clearInterval(carouselInterval);
+        carouselInterval = setInterval(rotateCarousel, 6000);
+    };
+
+    const handleOutsideClick = (e) => {
+        if (flippedCards.length > 0) {
+            // Check if click is outside all flipped cards
+            let clickedInsideCard = false;
+            for (let card of flippedCards) {
+                if (card.contains(e.target)) {
+                    clickedInsideCard = true;
+                    break;
+                }
+            }
+            
+            if (!clickedInsideCard) {
+                // Click outside all flipped cards - flip them all back
+                flippedCards.forEach(card => {
+                    card.classList.remove('flipped');
+                });
+                flippedCards = [];
+                startCarousel();
+            }
+        }
     };
 
     updateCarousel();
@@ -117,42 +176,51 @@ function renderKeyProjects(projects) {
         nextBtn.addEventListener('click', rotateCarousel);
     }
 
-    // Auto-scroll every 5 seconds (5000 milliseconds)
-    setInterval(rotateCarousel, 5000);
+    // Start auto-scroll
+    startCarousel();
+
+    // Add document click listener for outside clicks
+    document.addEventListener('click', handleOutsideClick);
 }
 
 // ... (keep renderProjects, renderPublications, renderFooter, toggleExperience as is) ...
 
 // Particle Background Animation (Spotlight Effect - No Idle/Mobile logic)
-function initParticles() {
-    const canvas = document.getElementById('hero-canvas');
+function initParticles(canvasId) {
+    const canvas = document.getElementById(canvasId);
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     let width, height;
     let particles = [];
+    const container = canvas.parentElement;
 
     // Mouse tracking
     let mouse = { x: null, y: null, radius: 150 }; // Interaction radius
 
-    window.addEventListener('mousemove', (e) => {
+    const handleMouseMove = (e) => {
         const rect = canvas.getBoundingClientRect();
         mouse.x = e.clientX - rect.left;
         mouse.y = e.clientY - rect.top;
-    });
+    };
 
-    window.addEventListener('mouseout', () => {
+    const handleMouseLeave = () => {
         mouse.x = null;
         mouse.y = null;
-    });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseout', handleMouseLeave);
 
     // Configuration
     const particleCount = 100; // High density
     const visibilityRadius = 500;
 
     function resize() {
-        width = canvas.width = canvas.offsetWidth;
-        height = canvas.height = canvas.offsetHeight;
+        if (!container) return;
+        const { offsetWidth, offsetHeight } = container;
+        width = canvas.width = offsetWidth;
+        height = canvas.height = offsetHeight;
     }
 
     class Particle {
@@ -165,7 +233,7 @@ function initParticles() {
             this.density = (Math.random() * 100) + 1;
             // Drift properties
             this.angle = Math.random() * 360;
-            this.angleSpeed = Math.random() * 0.02 + 0.005;
+            this.angleSpeed = Math.random() * 0.01 + 0.002;
             this.driftRadius = Math.random() * 20 + 10;
         }
 
@@ -465,25 +533,40 @@ function renderProjects(projects) {
     });
 }
 
-// Publications Section
+// Publications Section with Pagination
+let publicationsPage = 0;
+const PUBS_PER_PAGE = 5;
+
 function renderPublications(pubs) {
     const list = document.getElementById('publications-list');
+    list.innerHTML = '';
+    
+    const startIdx = publicationsPage * PUBS_PER_PAGE;
+    const endIdx = startIdx + PUBS_PER_PAGE;
+    const pubsToShow = pubs.slice(startIdx, endIdx);
 
-    pubs.forEach(pub => {
+    pubsToShow.forEach(pub => {
         const item = document.createElement('div');
         item.className = 'publication-item';
+        
+        const pdfUrl = pub.pdfUrl || 'assets/publications_pdf/essd-grain-preprint-v1.pdf';
+        const doiUrl = pub.doiUrl ? `https://doi.org/${pub.doiUrl}` : 'https://doi.org/10.1029/2025EF006648';
+        
         item.innerHTML = `
             <div class="pub-header">
                 <div class="pub-title">${pub.title}</div>
                 <i class="fas fa-chevron-down pub-icon"></i>
             </div>
             <div class="pub-meta">
-                ${pub.authors} (${pub.year}) - <em>${pub.venue}</em>
+                ${pub.authors} (${pub.year}) - <span class="venue-blue">${pub.venue}</span>
             </div>
             <div class="pub-abstract">
                 <strong>Abstract:</strong> ${pub.abstract}
                  <br><br>
-                 ${pub.doi ? `<a href="https://doi.org/${pub.doi.replace('doi: ', '')}" target="_blank" style="color:var(--teal)">View Paper <i class="fas fa-external-link-alt"></i></a>` : ''}
+                 <div class="pub-buttons">
+                    <a href="${pdfUrl}" download class="pub-btn pdf-btn"><i class="fas fa-file-pdf"></i> PDF</a>
+                    <a href="${doiUrl}" target="_blank" class="pub-btn doi-btn"><i class="fas fa-external-link-alt"></i> DOI</a>
+                 </div>
             </div>
         `;
 
@@ -493,6 +576,38 @@ function renderPublications(pubs) {
 
         list.appendChild(item);
     });
+
+    // Add pagination controls
+    const paginationContainer = document.createElement('div');
+    paginationContainer.className = 'pub-pagination';
+    
+    const leftBtn = document.createElement('button');
+    leftBtn.className = 'pub-nav-btn';
+    leftBtn.innerHTML = '&lt;';
+    leftBtn.disabled = publicationsPage === 0;
+    leftBtn.addEventListener('click', () => {
+        if (publicationsPage > 0) {
+            publicationsPage--;
+            renderPublications(pubs);
+            document.getElementById('publications-list').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    paginationContainer.appendChild(leftBtn);
+    
+    const rightBtn = document.createElement('button');
+    rightBtn.className = 'pub-nav-btn';
+    rightBtn.innerHTML = '&gt;';
+    rightBtn.disabled = endIdx >= pubs.length;
+    rightBtn.addEventListener('click', () => {
+        if (endIdx < pubs.length) {
+            publicationsPage++;
+            renderPublications(pubs);
+            document.getElementById('publications-list').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    paginationContainer.appendChild(rightBtn);
+    
+    list.appendChild(paginationContainer);
 }
 
 function renderFooter(profile) {

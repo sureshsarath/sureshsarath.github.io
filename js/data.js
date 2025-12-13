@@ -101,30 +101,81 @@ const resumeData = {
     ],
     publications: [
         {
-            title: "GRAIN – A Global Registry of Agricultural Irrigation Networks",
-            authors: "Suresh, S. et al.",
+            title: "Has Hydropower Made the World More Flood-Prone?",
+            authors: "<strong>Suresh, S.</strong> and Hossain, F.",
             year: "2025",
-            venue: "Earth System Science Data (in review)",
+            venue: "Earth's Future",
+            doi: "10.1029/2025EF006648",
             type: "Journal",
-            abstract: "Abstract content placeholder. The paper describes the development of the GRAIN dataset..."
+            abstract: `Hydropower has emerged as a cornerstone of global renewable energy initiatives, providing a reliable and renewable source of electricity essential to achieving low emissions targets. 
+                        However, its expansion, especially in high-precipitation and mountainous regions of developing countries, has sparked growing concerns about its role in exacerbating downstream flood risks.
+                         This study critically examines the complex relationship between hydropower development and flood risk through the analysis of 107 major hydropower dams in such regions of the world spanning a period of 40 years.
+                         While 41.1% of the studied dams were found to exhibit flood mitigating characteristics by buffering against extreme inflows, 26.2% of dams were likely to exacerbate flood risks,
+                         primarily due to a steady increase in precipitation rates and sedimentation-induced capacity loss. Hydropower dams in regions with shorter downstream river lengths were found to be more flood-inducing than flood-protecting.
+                         While regions with flood-protecting dams naturally trigger urbanization and economic growth due to perceived safety and stable energy availability, these benefits are accompanied by the cost of increased deforestation.
+                         The study identified hotspots in South America and South Asia, where hydropower dams are more likely to be clustered as flood inducing in nature. Overall, the study calls for a paradigm shift in hydropower planning and management, 
+                         emphasizing the integration of adaptive flood risk mitigation into energy production strategies keeping in mind the anticipated changes in climate and land cover along with a robust sedimentation management strategy during the dam's service lifespan.`,
+            pdfUrl: "assets/publications_pdf/essd-grain-preprint-v1.pdf"
         },
         {
-            title: "Has Hydropower made the World more Flood-Prone?",
-            authors: "Suresh, S. and Hossain, F.",
+            title: "GRAIN – A Global Registry of Agricultural Irrigation Networks",
+            authors: "<strong>Suresh, S.</strong>, Hossain, F., Mishra, V., Hossain, N",
             year: "2025",
-            venue: "AGU Earth's Future (preprint)",
-            doi: "10.22541/essoar.175573840.03013701/v1",
-            type: "Journal",
-            abstract: "This study investigates the correlation between hydropower dam construction and downstream flood frequency on a global scale."
+            venue: "Earth System Science Data",
+            doi: "10.5194/essd-2025-488",
+            type: "Journal (Preprint)",
+            abstract: 'abc',
+            pdfUrl: "assets/publications_pdf/essd-grain-preprint-v1.pdf"
         },
         {
             title: "Satellite-based Tracking of Reservoir Operations for Flood Management During the 2018 Extreme Weather Event in Kerala, India",
-            authors: "Suresh, S. et al.",
+            authors: "<strong>Suresh, S.</strong>, Hossain, F., Minocha, S., Das, P., Khan, S., Lee, H., Andreadis, K., Oddo, P.",
             year: "2024",
-            venue: "Remote Sensing of Environment",
+            venue: "Remote Sensing of the Environment",
             doi: "10.1016/j.rse.2024.114149",
             type: "Journal",
-            abstract: "Analysis of reservoir operations during the 2018 Kerala floods using satellite altimetry and precipitation data."
+            abstract: "Analysis of reservoir operations during the 2018 Kerala extreme weather event using satellite altimetry and hydrological models to understand flood management strategies.",
+            pdfUrl: "assets/publications_pdf/essd-grain-preprint-v1.pdf"
+        },
+        {
+            title: "Forecast-Informed Reservoir Operations within a Satellite-Based Framework for Mountainous and High-Precipitation Regions: Case of the 2018 Kerala Floods",
+            authors: "Das, P., <strong>Suresh, S.</strong>, Hossain, F., Balakrishnan, V., Jainet, P.J., Lee, H., Laverde, M., Hosen, K., Meechaiya, C. and Towashiraporn, P.",
+            year: "2025",
+            venue: "Journal of Hydrologic Engineering",
+            doi: "10.1061/JHYEFF.HEENG-6276",
+            type: "Journal",
+            abstract: "Forecast-Informed Reservoir Operations within a Satellite-Based Framework for Mountainous and High-Precipitation Regions: Case of the 2018 Kerala Floods.",
+            pdfUrl: "assets/publications_pdf/essd-grain-preprint-v1.pdf"
+        },
+        {
+            title: "ResORR: A globally scalable and satellite data-driven algorithm for river flow regulation due to reservoir operations",
+            authors: "Das, P., Hossain, F., Minocha, S., <strong>Suresh, S.</strong>, Darkwah, G.K., Lee, H., Andreadis, K., Laverde-Barajas, M. and Oddo, P.",
+            year: "2024",
+            venue: "Environmental Modelling & Software",
+            doi: "10.1016/j.envsoft.2024.106026",
+            type: "Journal",
+            abstract: "ResORR: A globally scalable and satellite data-driven algorithm for river flow regulation due to reservoir operations.",
+            pdfUrl: "assets/publications_pdf/essd-grain-preprint-v1.pdf"
+        },
+        {
+            title: "Reservoir Assessment Tool version 3.0: a scalable and user-friendly software platform to mobilize the global water management community",
+            authors: "Minocha, S., Hossain, F., Das, P., <strong>Suresh, S.</strong>, Khan, S., Darkwah, G., Lee, H., Galelli, S., Andreadis, K. and Oddo, P.",
+            year: "2023",
+            venue: "Geoscientific Model Development Discussions",
+            doi: "10.5194/gmd-17-3137-2024",
+            type: "Journal",
+            abstract: "Reservoir Assessment Tool version 3.0: a scalable and user-friendly software platform to mobilize the global water management community.",
+            pdfUrl: "assets/publications_pdf/essd-grain-preprint-v1.pdf"
+        },
+        {
+            title: "Reconstruction of the hydro-thermal behavior of regulated river networks of the Columbia River Basin using satellite remote sensing and data-driven techniques",
+            authors: "Darkwah, G., Hossain, F., Tchervenski, V., Holtgrieve, G., Graves, D., Seaton, C., Minocha, S., Das, P., Khan, S. and <strong>Suresh, S.</strong>",
+            year: "2024",
+            venue: "Earth's Future",
+            doi: "10.1029/2024EF004815",
+            type: "Journal",
+            abstract: "Reconstruction of the hydro-thermal behavior of regulated river networks of the Columbia River Basin using satellite remote sensing and data-driven techniques.",
+            pdfUrl: "assets/publications_pdf/essd-grain-preprint-v1.pdf"
         }
     ],
     projects: [

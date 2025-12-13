@@ -19,8 +19,9 @@
         <div class="logo">SS</div>
         <ul class="nav-links">
             <li><a href="#about">About</a></li>
+            <li><a href="#key-projects">Highlights</a></li>
+            <li><a href="#publications">Publications</a></li>
             <li><a href="#resume">Resume</a></li>
-            <li><a href="#projects">Projects</a></li>
 
         </ul>
         <div class="hamburger">
@@ -56,11 +57,23 @@
             <div class="about-content">
                 <div class="about-text">
                     <h2 class="section-title">About Me</h2>
-                    <p>I am a PhD student at the University of Washington specializing in <b>hydrology, remote sensing, and data science</b>. My research focuses on the intersection of hydropower, flood risk, and agricultural productivity, with particular emphasis on understanding irrigation networks and water resource management at the global scale. I combine satellite imagery analysis, machine learning, and hydrological modeling to develop innovative solutions for water-related challenges. Outside of research, I'm passionate about open-source geospatial tools and data science applications that can make a real-world impact on water security and sustainable agriculture.</p>
+                    <p>I am a PhD student at the University of Washington specializing in <b>satellite remote sensing, hydrology, and data science</b>. My research focuses on the intersection of hydropower, flood risk, and agricultural productivity, with particular emphasis on understanding irrigation networks and water resource management at the global scale. I combine satellite imagery analysis, machine learning, and hydrological modeling to develop innovative solutions for water-related challenges. Outside of research, I'm passionate about open-source geospatial tools and data science applications that can make a real-world impact on water security and sustainable agriculture.</p>
+                    <div class="key-areas">
+                        <h3>Key Research Areas</h3>
+                    </div>
                 </div>
                 <div class="about-image">
                     <img src="assets/satellite_gif_l9.gif" alt="Satellite imagery" id="about-img">
                 </div>
+            </div>
+            <div class="key-area-tags about-wide-tags">
+                <span class="key-area-tag">Satellite Remote Sensing</span>
+                <span class="key-area-tag">Machine Learning in Earth Science</span>
+                <span class="key-area-tag">Hydrology</span>
+                <span class="key-area-tag">Flood Risk Mitigation</span>
+                <span class="key-area-tag">Hydropower Dams</span>
+                <span class="key-area-tag">Agricultural Productivity</span>
+                <span class="key-area-tag">Data Science</span>
             </div>
         </div>
     </section>
@@ -68,6 +81,7 @@
     <section id="key-projects" class="section">
         <div class="container">
             <h2 class="section-title">Highlights</h2>
+            <p class="section-subtitle">A curated mix of recent projects, collaborations, and press highlights.</p>
             
             <div class="carousel-container">
                 <div class="project-carousel" id="key-projects-carousel">
@@ -86,12 +100,21 @@
             <div class="publications-list" id="publications-list">
                 <!-- Populated by JS -->
             </div>
+            <div class="publication-links">
+                <a class="publication-btn scholar-btn" href="https://scholar.google.com/citations?user=GSJvqkAAAAAJ&hl=en" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-google"></i> Google Scholar
+                </a>
+                <a class="publication-btn orcid-btn" href="https://orcid.org/0009-0002-0466-0746" target="_blank" rel="noopener">
+                    <i class="fa-brands fa-orcid"></i> ORCID
+                </a>
+            </div>
         </div>
     </section>
 
-    <section id="resume" class="section dark-bg">
+    <section id="resume" class="section resume-section">
+        <canvas id="resume-canvas"></canvas>
         <div class="container">
-            <!-- Headers are now inside the columns or just removed if redundant? Image shows headers "Education" and "Professional Experience" at top of cols. -->
+            <h2 class="section-title resume-heading">Resume</h2>
             <div class="resume-container">
                 <div class="resume-column">
                     <h3 class="column-title">Education</h3>
@@ -109,6 +132,11 @@
                     <h3 class="column-title">Professional Experience</h3>
                     <div id="experience-list" class="resume-list"></div>
                 </div>
+            </div>
+            <div class="resume-download">
+                <a href="assets/Sarath_Suresh_Resume.pdf" class="btn resume-btn" download>
+                    <i class="fas fa-download"></i> PDF Version
+                </a>
             </div>
         </div>
     </section>
