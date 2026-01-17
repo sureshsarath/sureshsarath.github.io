@@ -25,6 +25,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const setupModal = (triggerSelector, modalId) => {
+        const triggers = document.querySelectorAll(triggerSelector);
+        const modal = document.getElementById(modalId);
+        if (!modal || triggers.length === 0) return;
+
+        const modalClose = modal.querySelector('.modal-close');
+
+        const closeModal = () => {
+            modal.classList.remove('is-visible');
+            modal.setAttribute('aria-hidden', 'true');
+        };
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                modal.classList.add('is-visible');
+                modal.setAttribute('aria-hidden', 'false');
+            });
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        if (modalClose) {
+            modalClose.addEventListener('click', closeModal);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    };
+
+    setupModal('.js-linkedin-toggle', 'linkedin-modal');
+    setupModal('.js-poster-toggle', 'poster-modal');
+
     // Load Data
     if (typeof resumeData !== 'undefined') {
         renderHero(resumeData.profile);
@@ -75,13 +115,12 @@ function renderKeyProjects(projects) {
     let currentProjects = [...projects];
     let carouselInterval = null;
     let flippedCards = []; // Track all flipped cards
+    let isAnimating = false;
 
     const updateCarousel = () => {
         carousel.innerHTML = '';
-        // Show first 3 projects
-        const visibleProjects = currentProjects.slice(0, 3);
 
-        visibleProjects.forEach(project => {
+        currentProjects.forEach(project => {
             const cardFlip = document.createElement('div');
             cardFlip.className = 'project-card-flip';
 
@@ -128,26 +167,40 @@ function renderKeyProjects(projects) {
         });
     };
 
+    const getSlideDistance = () => {
+        const firstCard = carousel.querySelector('.project-card-flip');
+        if (!firstCard) return 0;
+        const styles = window.getComputedStyle(carousel);
+        const gapValue = styles.columnGap || styles.gap || '0px';
+        const gap = parseFloat(gapValue);
+        return firstCard.getBoundingClientRect().width + (Number.isNaN(gap) ? 0 : gap);
+    };
+
     const rotateCarousel = () => {
-        if (flippedCards.length > 0) return; // Don't rotate if any cards are flipped
-        
-        // Add swipe-out animation
-        carousel.classList.add('swiping');
-        
-        setTimeout(() => {
-            // Rotate array: move first element to end
+        if (flippedCards.length > 0 || isAnimating) return;
+        const distance = getSlideDistance();
+        if (!distance) return;
+
+        isAnimating = true;
+        carousel.classList.add('is-sliding');
+        carousel.style.transform = `translateX(-${distance}px)`;
+
+        const handleTransitionEnd = () => {
+            carousel.classList.remove('is-sliding');
+            carousel.style.transform = 'translateX(0)';
             const first = currentProjects.shift();
             currentProjects.push(first);
+            flippedCards = [];
             updateCarousel();
-            
-            // Remove swipe-out class to fade back in
-            carousel.classList.remove('swiping');
-        }, 300);
+            isAnimating = false;
+        };
+
+        carousel.addEventListener('transitionend', handleTransitionEnd, { once: true });
     };
 
     const startCarousel = () => {
         if (carouselInterval) clearInterval(carouselInterval);
-        carouselInterval = setInterval(rotateCarousel, 6000);
+        carouselInterval = setInterval(rotateCarousel, 12000);
     };
 
     const handleOutsideClick = (e) => {
@@ -181,6 +234,12 @@ function renderKeyProjects(projects) {
 
     // Start auto-scroll
     startCarousel();
+
+    window.addEventListener('resize', () => {
+        carousel.classList.remove('is-sliding');
+        carousel.style.transform = 'translateX(0)';
+        isAnimating = false;
+    });
 
     // Add document click listener for outside clicks
     document.addEventListener('click', handleOutsideClick);
@@ -282,41 +341,41 @@ function initParticles(canvasId) {
             }
         }
 
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.closePath();
+        // draw() {
+        //     ctx.beginPath();
+        //     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        //     ctx.closePath();
 
-            // Proximity Check for Color
-            let color = 'rgba(247, 247, 249, 1)'; // Default Dark Grey
-            let color_fill = 'rgba(228, 228, 231, 0.2)'; // Default Dark Grey
-            let shadow = 'rgba(254, 254, 254, 0.2)';
-            let linewidth = 0.5;
+        //     // Proximity Check for Color
+        //     let color = 'rgba(247, 247, 249, 0.2)'; // Default Dark Grey
+        //     let color_fill = 'rgba(228, 228, 231, 0.2)'; // Default Dark Grey
+        //     let shadow = 'rgba(254, 254, 254, 0.2)';
+        //     let linewidth = 0.1;
 
-            if (mouse.x != null) {
-                const dx = mouse.x - this.x;
-                const dy = mouse.y - this.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
+        //     if (mouse.x != null) {
+        //         const dx = mouse.x - this.x;
+        //         const dy = mouse.y - this.y;
+        //         const dist = Math.sqrt(dx * dx + dy * dy);
 
-                // If within a slightly larger radius than repulsion
-                if (dist < 100) {
-                    color = 'rgba(0, 242, 255, 1)';
-                    shadow = 'rgba(255, 255, 255, 1)';
-                    color_fill = 'rgba(171, 244, 248, 1)';
-                    linewidth = 1;
+        //         // If within a slightly larger radius than repulsion
+        //         if (dist < 100) {
+        //             color = 'rgba(255, 255, 255, 0.69)';
+        //             shadow = 'rgba(255, 255, 255, 0.2)';
+        //             color_fill = 'rgba(161, 161, 161, 0.99)';
+        //             linewidth = 1;
 
-                }
-            }
+        //         }
+        //     }
 
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = shadow;
-            ctx.strokeStyle = color;
-            ctx.lineWidth = linewidth;
-            ctx.fillStyle = color_fill;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-            ctx.stroke();
-        }
+        //     ctx.shadowBlur = 10;
+        //     ctx.shadowColor = shadow;
+        //     ctx.strokeStyle = color;
+        //     ctx.lineWidth = linewidth;
+        //     ctx.fillStyle = color_fill;
+        //     ctx.fill();
+        //     ctx.shadowBlur = 0;
+        //     ctx.stroke();
+        // }
     }
 
     function init() {
@@ -539,7 +598,7 @@ function renderProjects(projects) {
 // Publications Section with Pagination
 let publicationsPage = 0;
 const PUBS_PER_PAGE = 5;
-const RELATED_PER_PAGE = 3;
+const RELATED_PER_PAGE = 5;
 const relatedPagination = {
     conferences: 0,
     patents: 0

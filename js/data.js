@@ -7,13 +7,13 @@ const resumeData = {
         dob: "20.04.1996",
         phone: "+1 206-396-9020",
         roles: ["GeoData Scientist", "Hydrologist", "Civil Engineer", "ML/AI in Earth Science"],
-        about: `<i>'Access to water data is as much a basic right as access to water itself!'</i> <br><br>Just as clean, safe water is a fundamental human right,
-                so too should open access to the data that governs it be.  As a research scholar at SASWE Labs, University of Washington, 
-                I leverage the power of satellite remote sensing and hydrological models to realize this vision. 
-                I collaborate with regional stakeholders to provide tools and solutions that address 
-                water-related challenges. Currently, my research focuses on assessing the impact of hydropower 
-                dams on downstream flooding and agricultural productivity across the world.
-                <br><br> Together, let us champion the cause for open and accessible water data!`,
+        about: `<i><span class="text-white">'Access to water data is as much a basic right as access to water itself!'</span></i> <br><br>Just as clean, safe water is a fundamental human right,
+                so too should <span class="text-white">open access to the data</span> that governs it be.  As a research scholar at <span class="text-white">SASWE Labs, University of Washington</span>, 
+                I leverage the power of <span class="text-white">satellite remote sensing</span> and <span class="text-white">hydrological models</span> to realize this vision. 
+                I collaborate with <span class="text-white">regional stakeholders</span> to provide tools and solutions that address 
+                water-related challenges. Currently, my research focuses on assessing the impact of <span class="text-white">hydropower dams</span> 
+                on <span class="text-white">downstream flooding</span> and <span class="text-white">agricultural productivity</span> across the world.
+                <br><br> <span class="text-white">Together, let us champion the cause for open and accessible water data!</span> `,
         image: "assets/images/proPic.jpg"
     },
     education: [
@@ -180,19 +180,49 @@ const resumeData = {
     ],
     conferences: [
         {
-            title: "Satellite Earth Observations Based Tracking of Reservoir Operations for Flood Preparedness in Mountainous and High Precipitation Regions",
-            authors: "Suresh, S. et al.",
+            title: "Impact of Hydropower on Flood Risk and Food Production – Insights from Satellite Observations and the new GRAIN Dataset",
+            authors: "<strong>Suresh, S.</strong>, Hossain, F., Mishra, V., Hossain, N. ",
+            year: "2025",
+            venue: "AGU Fall Meeting Abstracts 2025, H41L-1321",
+            description: "AGU Fall Meeting abstract on the use of GRAIN data in providing insights into the effect of hydropower dams and downstream agriculture and flood risk."
+        },
+        {
+            title: "Satellite Earth Observations Based Tracking of Reservoir Operations for Flood Preparedness in Mountainous and High Precipitation Regions: A Case of the 2018 Kerala Floods",
+            authors: "<strong>Suresh, S.</strong>, Hossain, F., Minocha, S., Das, P., Khan, S., Lee, H., Andreadis, K., et al.",
             year: "2023",
-            venue: "AGU Fall Meeting 2023, San Francisco",
-            description: "Case study focused on the 2018 Kerala floods demonstrating how satellite data guides reservoir operations."
+            venue: "AGU Fall Meeting Abstracts 2023, H31S-1725",
+            description: "AGU Fall Meeting abstract on satellite-based reservoir tracking for flood preparedness in mountainous regions, with a focus on the 2018 Kerala floods."
         },
         {
             title: "Effect of Marine Growth on Wave Loading on Small Diameter Tubular Structural Members",
-            authors: "Suresh, S. et al.",
+            authors: "<strong> Suresh, S. </strong>, Behera,M., R., Moideen, R.",
             year: "2020",
             venue: "International Conference on Hydraulics, Water Resources and Coastal Engineering (HYDRO 2020), NIT Rourkela",
             description: "Investigates how marine growth alters hydrodynamic loading on offshore tubular structures."
-        }
+        },
+        {
+            title: "Hidden Sediments, Lost Capacity: How Swiftly Are Global Reservoirs Depleting?",
+            authors: "Minocha, S., Hossain, F., Zhao, J., <strong>Suresh, S.</strong>, Das, P.",
+            year: "2024",
+            venue: "AGU Fall Meeting Abstracts 2024, H53E-1146",
+            description: "AGU Fall Meeting abstract on global reservoir sedimentation and capacity loss trends."
+        },
+        {
+            title: "Collaborative Water Management for Advancing Open Science in Regulated River Basins with the Open-Source Reservoir Assessment Tool (RAT) 3.0: A Python Package Integrating Cloud …",
+            authors: "Minocha, S., Hossain, F., Das, P., <strong>Suresh, S.</strong>, Khan, S., Darkwah, G.",
+            year: "2023",
+            venue: "AGU Fall Meeting Abstracts 2023, H31W-1809",
+            description: "AGU Fall Meeting abstract on RAT 3.0 and open-science workflows for regulated basins."
+        },
+        {
+            title: "Reconstruction of the Hydro-Thermal History of Regulated River Networks Using Satellite Remote Sensing and Data-driven Techniques",
+            authors: "Darkwah, G., Hossain, F., Holtgrieve, G. W., Das, P., <strong>Suresh, S.</strong>",
+            year: "2023",
+            venue: "AGU Fall Meeting Abstracts 2023, H32B-01",
+            description: "AGU Fall Meeting abstract on hydro-thermal reconstruction of regulated river networks using satellite remote sensing."
+        },
+       
+        
     ],
     patents: [
         {
@@ -224,14 +254,16 @@ const resumeData = {
             subtitle: "A Python Package for India WRIS data",
             period: "Sep.2024 – Nov.2024",
             description: "Developed a Python package to access and analyze data from the India Water Resources Information System (IndiaWRIS). Implemented unique features including automated web scraping, rich hypertext support for Jupyter notebooks and built-in Plotly-based visualization capabilities.",
-            image: "assets/gifs/pywris_functionalities.gif"
+            image: "assets/gifs/pywris_functionalities.gif",
+            link: "https://github.com/sureshsarath/PyWRIS"
         },
         {
             title: "From Plate to Planet",
             subtitle: "Interactive Data Visualization",
             period: "Jan. 2024 – Mar. 2024",
             description: "A blog style interactive visualization built using VegaLite, JavaScript and Observable. Analyzed global datasets on methane emissions, meat consumption, and animal welfare to explore the role of environmental and ethical concerns in motivating shifts toward veganism.",
-            image: "assets/images/project2.png"
+            image: "assets/gifs/from_plate_to_planet.gif",
+            link: "https://observablehq.com/@sarath-suresh2-ws/from-plate-to-planet"
         },
         {
             title: "Optimal AE Sensor Placement for Crack Localization",
