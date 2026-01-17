@@ -285,8 +285,8 @@ ul {
 
 .hero-affiliations img {
     max-height: 100px;
-    opacity: 0.8;
-    filter: grayscale(20%);
+    opacity: 1;
+    
 }
 
 .profile-img-container img {
