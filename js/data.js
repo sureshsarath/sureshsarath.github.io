@@ -242,12 +242,29 @@ const resumeData = {
             image: "assets/images/grain_pic.png",
             link: "https://grain-canals.readthedocs.io/en/latest/"
         },
-         {
-            title: "RAT-Kerala",
-            subtitle: "A Python Package for India WRIS data",
+        {
+            title: "Has Hydropower Made the World Flood-Prone?",
+            subtitle: "A study on hydropower and flood risk",
+            period: "Feb.2024 – Feb.2025",
+            description: "A study on 100+ reservoirs across the equatorial belt that utilises 40+ years of satellite data to demystify the impact of Hydropower dams on flood risk. Published in AGU Earth's Future.",
+            image: "assets/images/agu_earths_future.png",
+            link: "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2025EF006648"
+        },
+        
+        {
+            title: "RAT-Kerala Tool",
+            subtitle: "A one stop monitoring tool for 20 Hydropower Dams in Kerala",
             period: "Sep.2024 – Nov.2024",
             description: "The Reservoir Assessment Tool – Kerala is a fully satellite-based tool that enables the transparent and near real time tracking of multiple reservoirs in the state of Kerala. The tool utilizes satellite derived storage estimates and hydrologically modelled inflow data to estimate critical reservoir operations data such as dam releases.",
             image: "assets/images/rat-kerala.jpg"
+        },
+        {
+            title: "Satellite Based Reservoir Monitoring for 2018 Kerala Floods",
+            subtitle: "A study on reservoir operations during extreme weather",
+            period: "Sep.2024 – Nov.2024",
+            description: "A study utilising a purely satellite data and VIC5.0 hydrological based model for reservoir monitoring to analyze operations during the 2018 extreme weather event in Kerala, India. Published in Remote Sensing of Environment.",
+            image: "assets/images/elsevier_logo_2.png",
+            link: "https://www.sciencedirect.com/science/article/abs/pii/S0034425724001603"
         },
         {
             title: "PyWRIS",
@@ -265,20 +282,14 @@ const resumeData = {
             image: "assets/gifs/from_plate_to_planet.gif",
             link: "https://observablehq.com/@sarath-suresh2-ws/from-plate-to-planet"
         },
-        {
-            title: "Optimal AE Sensor Placement for Crack Localization",
-            subtitle: "ML model for sensor optimization",
-            period: "Jun.2019 – Jan.2021",
-            description: "Developed a CatBoost based ML model to optimize the number and spatial arrangement of acoustic emission sensors for accurately localizing cracks in concrete slabs of varying geometry.",
-            image: "assets/images/project3.png"
-        },
-        {
-            title: "Image Steganography",
-            subtitle: "Data encryption within images",
-            period: "Jun. 2019 – Jan.2021",
-            description: "Implemented Image Steganography, the process of encrypting data within images, using the Least Significant Bit method in MATLAB, for images and text.",
-            image: "assets/images/project4.png"
-        }
+        
+        // {
+        //     title: "Image Steganography",
+        //     subtitle: "Data encryption within images",
+        //     period: "Jun. 2019 – Jan.2021",
+        //     description: "Implemented Image Steganography, the process of encrypting data within images, using the Least Significant Bit method in MATLAB, for images and text.",
+        //     image: "assets/images/project4.png"
+        // }
     ],
     skills: {
         courses: ["Water Systems Management", "Data Processing in Remote Sensing", "Geospatial Data Analysis", "Data Visualization", "Software Development for Data Scientists", "Numerical Methods", "Digital Image Processing"],
