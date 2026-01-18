@@ -67,6 +67,12 @@ ul {
     scroll-margin-top: 90px;
 }
 
+.section.no-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
 .section.fade-in {
     opacity: 1;
     transform: translateY(0);
@@ -392,6 +398,10 @@ ul {
     background-color: #ffffff;
 }
 
+#publications {
+    box-shadow: 0 -6px 12px -6px rgba(12, 31, 68, 0.2);
+}
+
 /* Recent Highlights */
 .recent-highlights {
     background: #ffffff;
@@ -586,8 +596,9 @@ ul {
 .about-section {
     padding: 1rem 10%;
     background-color: #ffffff;
-    box-shadow: 0 -4px 15px rgba(12, 31, 68, 0.13);
+    box-shadow: 0 -6px 12px -6px rgba(12, 31, 68, 0.2);
     margin-top: -2rem;
+    margin-bottom:-3rem;
     
 }
 
@@ -763,7 +774,7 @@ ul {
 /* Resume Section (Split Layout) */
 .resume-section {
     position: relative;
-    background: linear-gradient(135deg, #011425 0%, #00050b 100%);
+    background: linear-gradient(180deg, #011425 0%, #000000 100%);
     color: var(--white);
     padding: 4rem 0;
     overflow: hidden;
@@ -817,6 +828,44 @@ ul {
     background: rgba(255, 255, 255, 0.6);
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Contact Section */
+.contact-section {
+    background: #000000;
+    color: #ffffff;
+    padding-top: 3rem;
+}
+
+.contact-section .section-title {
+    text-align: left;
+    left: auto;
+    transform: none;
+    display: block;
+    margin-left: 0;
+}
+
+.contact-section .section-title::after {
+    background: #ffffff;
+}
+
+.contact-section .section-subtitle {
+    text-align: left;
+    margin-left: 0;
+    color: #ffffff;
+}
+
+.form-embed {
+    margin-top: 1.5rem;
+}
+
+.form-embed iframe {
+    width: 100%;
+    max-width: none;
+    height: 300px;
+    border: 0;
+    display: block;
+    filter: invert(1) hue-rotate(180deg);
 }
 
 .resume-container {
@@ -1599,8 +1648,8 @@ footer {
     /* Reduced top padding from 4rem to 2rem */
     background-color: #ffffff;
     margin-bottom: -1rem;
-    margin-top: 2rem;
-    box-shadow: 0 -4px 15px rgba(12, 31, 68, 0.13);
+    margin-top: 5rem;
+    box-shadow: 0 -6px 12px -6px rgba(12, 31, 68, 0.2);
     /* Light gray background to distinguish from hero */
 }
 
@@ -1630,6 +1679,8 @@ footer {
 .project-carousel-viewport {
     width: 100%;
     overflow: hidden;
+    padding: 16px;
+    box-sizing: border-box;
 }
 
 .project-carousel {

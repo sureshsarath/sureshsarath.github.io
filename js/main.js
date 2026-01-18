@@ -98,7 +98,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     document.querySelectorAll('.section').forEach(section => {
-        observer.observe(section);
+        if (!section.classList.contains('no-fade')) {
+            observer.observe(section);
+        }
     });
 
 });
